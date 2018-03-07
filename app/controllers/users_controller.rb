@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
   
   def index
     @users = User.all.page(params[:page])
   end
 
   def show
-    @user = User.find(params[:id])
+    @microposts= @user.microposts.order('created_at DESC').page(params[:page])
+    counts(@user)
   end
 
   def new
@@ -24,8 +26,25 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
+  
+  def edit
+  end
+  
+  def update
+    if @user.update(user_params)
+      flash[:success] = '更新に成功しました'
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+    
+    
   private
+  
+  def set_user
+    @user=User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
