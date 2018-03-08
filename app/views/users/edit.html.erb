@@ -28,5 +28,15 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
       
+      <div class="birth_date_field">
+      <%= f.label :birth %>
+      <%= f.date_select(
+          :birth,
+          start_year: 1950,
+          end_year:   (Time.now.year - 18),
+          default:    Date.new(1989, 1, 1)) %>
+      </div>
+      
+      
       <%= f.submit 'profile update', class: 'btn btn-primary btn-block' %>
 <% end %>
