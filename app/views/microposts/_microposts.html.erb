@@ -17,9 +17,7 @@
           <% end %>
         </div>
         <div>
-          <% if current_user != micropost.user %>
-          <%= render 'favorites/favorite_button', user: @user %>
-          <% end %>
+          <%= render 'favorites/favorite_button', user: @user, micropost: micropost %>
         </div>
       </div>
     </li>
