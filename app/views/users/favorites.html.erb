@@ -1,0 +1,27 @@
+<h1><%= @user.name %>のお気に入り一覧</h1>
+<p>お気に入りの数<span class="badge"><%= @count_favorites %></span></p>
+<div class="row">
+  <div class="col-md-8">
+<% if @favorites.any? %>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>投稿</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @favorites.each do |favorite| %>
+        <tr>
+          <td><%= favorite.id %></td>
+          <td><%= favorite.content %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  <div>
+    <%= paginate @favorites %>
+  </div>
+<% end %>
+</div>
+</div>
